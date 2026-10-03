@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#090714">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Arius Studio</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/controls.css">
+  <link rel="stylesheet" href="css/panels.css">
+  <link rel="stylesheet" href="css/stage.css">
+  <link rel="stylesheet" href="css/dialogs.css">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+  <div id="app">
+    <header id="topbar"></header>
+    <nav id="category-rail" aria-label="Catégories"></nav>
+    <nav id="tool-strip" aria-label="Outils"></nav>
+    <main id="stage"></main>
+    <!-- Sur ordinateur, #sheet est « transparent » (display: contents) : ses enfants restent dans la grille.
+         Sur téléphone, il devient le panneau qui monte depuis le bas. -->
+    <div id="sheet">
+      <div id="sheet-grip" class="sheet-grip"></div>
+      <section id="tool-panel" aria-label="Réglages de l’outil"></section>
+      <aside id="side-panel">
+        <section id="layers-panel" aria-label="Calques"></section>
+        <section id="properties-panel" aria-label="Propriétés"></section>
+      </aside>
+    </div>
+  </div>
+  <div id="toast-host" aria-live="polite"></div>
+  <div id="dialog-host"></div>
+
+  <!-- Noyau -->
+  <script src="js/core/namespace.js"></script>
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/events.js"></script>
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/history.js"></script>
+  <script src="js/core/presets.js"></script>
+  <script src="js/core/state.js"></script>
+  <!-- Polices -->
+  <script src="js/fonts/monocraft-data.js"></script>
+  <script src="js/fonts/fonts.js"></script>
+  <!-- Rendu -->
+  <script src="js/render/geometry.js"></script>
+  <script src="js/render/effects.js"></script>
+  <script src="js/render/patterns.js"></script>
+  <script src="js/render/layer-renderer.js"></script>
+  <script src="js/render/compositor.js"></script>
+  <!-- Interface : briques -->
+  <script src="js/ui/icons.js"></script>
+  <script src="js/ui/fields.js"></script>
+  <script src="js/ui/toast.js"></script>
+  <script src="js/ui/dialogs.js"></script>
+  <script src="js/ui/preset-bar.js"></script>
+  <!-- Outils (l'ordre ici = l'ordre dans la barre) -->
+  <script src="js/tools/kit.js"></script>
+  <script src="js/tools/tool-background.js"></script>
+  <script src="js/tools/tool-border.js"></script>
+  <script src="js/tools/tool-corners.js"></script>
+  <script src="js/tools/tool-effects.js"></script>
+  <script src="js/tools/tool-patterns.js"></script>
+  <script src="js/tools/tool-text.js"></script>
+  <script src="js/tools/tool-elements.js"></script>
+  <script src="js/tools/tool-shadow.js"></script>
+  <!-- Interface : zones -->
+  <script src="js/ui/tool-panel.js"></script>
+  <script src="js/ui/categories.js"></script>
+  <script src="js/ui/stage.js"></script>
+  <script src="js/ui/layers-panel.js"></script>
+  <script src="js/ui/properties-panel.js"></script>
+  <script src="js/ui/project.js"></script>
+  <script src="js/ui/export.js"></script>
+  <script src="js/ui/shortcuts.js"></script>
+  <script src="js/ui/topbar.js"></script>
+  <script src="js/ui/mobile.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

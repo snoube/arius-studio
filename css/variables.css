@@ -1,0 +1,32 @@
+/* Palette et mesures communes. */
+
+:root {
+  --void: #090714;
+  --hull: #110e1f;
+  --hull-2: #171329;
+  --hull-3: #1e1934;
+  --edge: #2b2449;
+  --edge-hi: #3d3466;
+  --crystal: #9b6bff;
+  --crystal-deep: #5b3fd1;
+  --crystal-glow: rgba(155, 107, 255, 0.35);
+  --ion: #3ee6f5;
+  --ion-soft: rgba(62, 230, 245, 0.16);
+  --text: #e8e4ff;
+  --muted: #8e87b5;
+  --dim: #5f5884;
+  --danger: #ff5c8a;
+
+  --font-ui: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-title: 'Monocraft', 'Consolas', ui-monospace, monospace;
+  --font-mono: 'Consolas', 'Cascadia Mono', ui-monospace, monospace;
+
+  --n: 10px;            /* taille des encoches des panneaux */
+  --n-sm: 4px;          /* encoches des boutons et champs */
+  --rail-w: 56px;
+  --strip-w: 76px;
+  --panel-w: 316px;
+  --side-w: 284px;
+  --top-h: 52px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}

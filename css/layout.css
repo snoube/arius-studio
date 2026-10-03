@@ -1,0 +1,182 @@
+/* Grille générale : rail | outils | réglages | image | calques. */
+#app {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: var(--rail-w) var(--strip-w) var(--panel-w) minmax(0, 1fr) var(--side-w);
+  grid-template-rows: var(--top-h) minmax(0, 1fr);
+  grid-template-areas:
+    'rail top    top   top   top'
+    'rail strip  panel stage side';
+}
+
+#topbar { grid-area: top; }
+#category-rail { grid-area: rail; }
+#tool-strip { grid-area: strip; }
+#tool-panel { grid-area: panel; }
+#stage { grid-area: stage; }
+#side-panel { grid-area: side; }
+
+/* ---------- Barre du haut ---------- */
+#topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 14px 0 18px;
+  background: linear-gradient(180deg, var(--hull) 0%, var(--void) 100%);
+  border-bottom: 1px solid var(--edge);
+  position: relative;
+  z-index: 20;
+}
+#topbar::after {
+  /* filet lumineux sous la barre */
+  content: '';
+  position: absolute;
+  left: 0; bottom: -1px;
+  width: 220px; height: 1px;
+  background: linear-gradient(90deg, var(--crystal), transparent);
+}
+
+.top-left, .top-center, .top-right { display: flex; align-items: center; gap: 8px; }
+.top-left { min-width: 0; flex: 1; }
+.top-right { flex: 1; justify-content: flex-end; }
+
+.brand {
+  font-family: var(--font-title);
+  font-size: 15px;
+  letter-spacing: .02em;
+  color: var(--text);
+  white-space: nowrap;
+}
+.top-sep { width: 1px; height: 18px; background: var(--edge-hi); margin: 0 4px; }
+.top-context { color: var(--crystal); white-space: nowrap; font-weight: 600; }
+
+.project-name {
+  min-width: 80px;
+  max-width: 240px;
+  flex: 1;
+  margin-left: 8px;
+  padding: 5px 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  text-overflow: ellipsis;
+}
+.project-name:hover { border-color: var(--edge); }
+.project-name:focus { border-color: var(--crystal); color: var(--text); background: var(--hull-2); }
+
+.zoom-group { display: flex; align-items: center; gap: 4px; margin-right: 6px; }
+.zoom-label { min-width: 52px; text-align: center; font-family: var(--font-mono); color: var(--muted); font-size: 12px; }
+
+.menu-wrap { position: relative; }
+.menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 260px;
+  padding: 6px;
+  --frame: var(--edge-hi);
+  --fill: var(--hull-2);
+  --n-sm: 8px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .5);
+}
+.menu-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px;
+  background: none; border: 0; text-align: left;
+  color: var(--text);
+}
+.menu-item svg { color: var(--muted); flex: none; }
+.menu-item:hover { background: var(--edge); }
+.menu-item:hover svg { color: var(--ion); }
+.menu-sep { border: 0; border-top: 1px solid var(--edge); margin: 4px 6px; }
+
+/* ---------- Rail des catégories ---------- */
+#category-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 0 14px;
+  background: var(--void);
+  border-right: 1px solid var(--edge);
+}
+.rail-logo { width: 40px; height: 40px; image-rendering: auto; filter: drop-shadow(0 0 10px var(--crystal-glow)); }
+.rail-list { display: flex; flex-direction: column; gap: 8px; padding-top: 10px; border-top: 1px solid var(--edge); }
+.rail-btn {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  position: relative;
+}
+.rail-btn:hover:not(:disabled) { color: var(--text); background: var(--hull-2); }
+.rail-btn.is-active { color: var(--ion); background: var(--ion-soft); border-color: rgba(62, 230, 245, .35); }
+.rail-btn.is-active::before {
+  content: ''; position: absolute; left: -9px; top: 8px; bottom: 8px; width: 3px; background: var(--ion);
+}
+.rail-btn.is-soon { border: 1px dashed var(--edge-hi); color: var(--dim); }
+
+/* ---------- Barre d'outils ---------- */
+#tool-strip {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding: 10px 8px;
+  background: var(--hull);
+  border-right: 1px solid var(--edge);
+  overflow-y: auto;
+}
+.strip-label { color: var(--dim); font-size: 11px; text-align: center; padding-bottom: 4px; }
+.tool-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 9px 2px 7px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  font-size: 10.5px;
+  line-height: 1.15;
+  text-align: center;
+  position: relative;
+  transition: color .15s var(--ease), background .15s var(--ease);
+}
+.tool-btn:hover { color: var(--text); background: var(--hull-2); }
+.tool-btn.is-active {
+  color: var(--text);
+  background: linear-gradient(180deg, rgba(155, 107, 255, .22), rgba(91, 63, 209, .12));
+  border-color: rgba(155, 107, 255, .45);
+}
+.tool-btn.is-active svg { color: var(--crystal); filter: drop-shadow(0 0 6px var(--crystal-glow)); }
+
+/* ---------- Panneau d'outil ---------- */
+#tool-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--hull);
+  border-right: 1px solid var(--edge);
+}
+
+/* ---------- Zone de travail ---------- */
+#stage { position: relative; min-width: 0; min-height: 0; }
+
+/* ---------- Colonne de droite ---------- */
+#side-panel {
+  display: grid;
+  grid-template-rows: minmax(160px, 1fr) minmax(160px, 1fr);
+  min-height: 0;
+  background: var(--hull);
+  border-left: 1px solid var(--edge);
+}
+#layers-panel, #properties-panel { display: flex; flex-direction: column; min-height: 0; }
+#properties-panel { border-top: 1px solid var(--edge); }
+
+/* Écrans étroits : on réduit les colonnes. */
+@media (max-width: 1280px) {
+  :root { --panel-w: 290px; --side-w: 250px; }
+  .top-context { display: none; }
+}

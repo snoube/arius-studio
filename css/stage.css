@@ -1,0 +1,75 @@
+/* Zone de travail : fond à points, cadre de l'image, sélection, informations. */
+.stage-scroll {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(91, 63, 209, .10), transparent 60%),
+    radial-gradient(rgba(142, 135, 181, .14) 1px, transparent 1.2px) 0 0 / 22px 22px,
+    var(--void);
+}
+.stage-scroll.can-pan { cursor: grab; }
+.stage-scroll.is-panning { cursor: grabbing; }
+
+.stage-pad {
+  min-width: 100%;
+  min-height: 100%;
+  width: max-content;
+  height: max-content;
+  padding: 70px;
+  display: grid;
+  place-items: center;
+}
+
+.canvas-frame {
+  position: relative;
+  /* damier sombre = transparence */
+  background: conic-gradient(#262040 25%, #1a1630 0 50%, #262040 0 75%, #1a1630 0) 0 0 / 16px 16px;
+  outline: 1px solid var(--edge-hi);
+  box-shadow: 0 0 0 6px rgba(9, 7, 20, .6), 0 30px 80px rgba(0, 0, 0, .55);
+  touch-action: none;
+}
+.doc-canvas { display: block; }
+.canvas-frame.is-pixelated .doc-canvas { image-rendering: pixelated; }
+
+.tick { position: absolute; width: 14px; height: 14px; border: 0 solid var(--ion); pointer-events: none; }
+.tick-tl { top: -12px; left: -12px; border-top-width: 2px; border-left-width: 2px; }
+.tick-tr { top: -12px; right: -12px; border-top-width: 2px; border-right-width: 2px; }
+.tick-bl { bottom: -12px; left: -12px; border-bottom-width: 2px; border-left-width: 2px; }
+.tick-br { bottom: -12px; right: -12px; border-bottom-width: 2px; border-right-width: 2px; }
+
+.selection-box {
+  position: absolute;
+  pointer-events: none;
+  outline: 1px solid var(--ion);
+  box-shadow: 0 0 0 1px rgba(9, 7, 20, .7), 0 0 12px rgba(62, 230, 245, .35);
+}
+.selection-box.is-locked { outline-style: dashed; outline-color: var(--crystal); box-shadow: none; }
+.sel-label {
+  position: absolute;
+  left: -1px;
+  bottom: calc(100% + 4px);
+  padding: 1px 6px;
+  background: var(--ion);
+  color: var(--void);
+  font: 600 10.5px/1.5 var(--font-mono);
+  white-space: nowrap;
+}
+.selection-box.is-locked .sel-label { background: var(--crystal); color: #fff; }
+
+.stage-hud {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  display: flex;
+  gap: 6px;
+  pointer-events: none;
+}
+.hud-chip {
+  padding: 3px 9px;
+  background: rgba(17, 14, 31, .88);
+  border: 1px solid var(--edge);
+  color: var(--muted);
+  font: 11px/1.5 var(--font-mono);
+}
+.hud-chip:empty { display: none; }

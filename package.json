@@ -1,0 +1,14 @@
+{
+  "name": "arius-studio",
+  "productName": "Arius Studio",
+  "version": "1.1.0",
+  "description": "Application d'aide à la création d'images pour le serveur Minecraft Arius.",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^37.0.0"
+  }
+}

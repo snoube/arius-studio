@@ -1,0 +1,187 @@
+/* Boutons, champs, interrupteurs, préréglages. */
+
+/* ---------- Boutons ---------- */
+.btn, .icon-btn {
+  --frame: var(--edge-hi);
+  --fill: var(--hull-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: var(--text);
+  white-space: nowrap;
+}
+.btn { height: 32px; padding: 0 14px; font-weight: 600; }
+.btn-small { height: 30px; padding: 0 10px; font-size: 12px; }
+.icon-btn { width: 32px; height: 32px; padding: 0; color: var(--muted); }
+.btn:hover:not(:disabled), .icon-btn:hover:not(:disabled) { --frame: var(--crystal); --fill: var(--hull-3); color: var(--text); }
+.btn:active:not(:disabled), .icon-btn:active:not(:disabled) { --fill: var(--edge); }
+
+.btn-primary {
+  --frame: #b894ff;
+  --fill: linear-gradient(180deg, var(--crystal) 0%, var(--crystal-deep) 100%);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .25);
+}
+.btn-primary:hover:not(:disabled) { --frame: #d6c2ff; --fill: linear-gradient(180deg, #ab82ff 0%, #6a4ee0 100%); }
+
+.btn-danger { --frame: rgba(255, 92, 138, .5); color: var(--danger); }
+.btn-danger:hover:not(:disabled) { --frame: var(--danger); --fill: rgba(255, 92, 138, .12); color: #ffd0de; }
+
+/* ---------- Formulaires ---------- */
+.form { display: flex; flex-direction: column; gap: 10px; }
+.field {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  align-items: center;
+  gap: 4px 10px;
+}
+.field-label { color: var(--muted); font-size: 12px; line-height: 1.25; }
+.field-hint { grid-column: 2; color: var(--dim); font-size: 11px; line-height: 1.35; }
+.field-textarea, .field-segmented.is-wide { grid-template-columns: 1fr; }
+.field-textarea .field-hint { grid-column: 1; }
+
+.input {
+  width: 100%;
+  height: 30px;
+  padding: 0 8px;
+  background: var(--void);
+  border: 1px solid var(--edge);
+  color: var(--text);
+  transition: border-color .15s var(--ease), background .15s var(--ease);
+}
+.input:hover { border-color: var(--edge-hi); }
+.input:focus { border-color: var(--crystal); background: #0c0a1b; outline: none; }
+.input.invalid { border-color: var(--danger); background: rgba(255, 92, 138, .08); }
+.textarea { height: auto; min-height: 64px; padding: 6px 8px; resize: vertical; line-height: 1.4; }
+
+.select {
+  appearance: none;
+  padding-right: 26px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(-45deg, transparent 50%, var(--muted) 50%);
+  background-position: calc(100% - 13px) 13px, calc(100% - 9px) 13px;
+  background-size: 4px 4px;
+  background-repeat: no-repeat;
+}
+.select option { background: var(--hull-2); color: var(--text); }
+
+/* nombres avec unité */
+.num { position: relative; display: flex; align-items: center; }
+.num-input { font-family: var(--font-mono); padding-right: 30px; }
+
+.unit { position: absolute; right: 8px; color: var(--dim); font-size: 11px; pointer-events: none; }
+.num-input[type=number] { -moz-appearance: textfield; }
+
+/* curseur + nombre */
+.range { display: grid; grid-template-columns: minmax(0, 1fr) 78px; gap: 8px; align-items: center; }
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 18px;
+  background: transparent;
+  margin: 0;
+}
+.slider::-webkit-slider-runnable-track { height: 4px; background: linear-gradient(90deg, var(--crystal-deep), var(--edge-hi)); }
+.slider::-moz-range-track { height: 4px; background: var(--edge-hi); }
+.slider::-moz-range-progress { height: 4px; background: var(--crystal-deep); }
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px; height: 12px;
+  margin-top: -4px;
+  background: var(--text);
+  border: 2px solid var(--crystal);
+  transform: rotate(45deg);
+}
+.slider::-moz-range-thumb {
+  width: 9px; height: 9px;
+  background: var(--text);
+  border: 2px solid var(--crystal);
+  border-radius: 0;
+  transform: rotate(45deg);
+}
+.slider:focus-visible { outline-offset: 0; }
+
+/* couleur : nuancier + hexadécimal */
+.color { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 6px; }
+.swatch-wrap {
+  position: relative;
+  width: 30px; height: 30px;
+  border: 1px solid var(--edge-hi);
+  background: conic-gradient(#2a2440 25%, #1a1630 0 50%, #2a2440 0 75%, #1a1630 0) 0 0 / 8px 8px;
+  overflow: hidden;
+}
+.swatch {
+  position: absolute; inset: -6px;
+  width: calc(100% + 12px); height: calc(100% + 12px);
+  padding: 0; border: 0; background: none; cursor: pointer;
+}
+.swatch::-webkit-color-swatch-wrapper { padding: 0; }
+.swatch::-webkit-color-swatch { border: 0; }
+.swatch::-moz-color-swatch { border: 0; }
+.hex-input { font-family: var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+
+/* boutons segmentés */
+.segmented {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--void);
+  border: 1px solid var(--edge);
+}
+.seg {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  height: 26px;
+  padding: 0 6px;
+  white-space: nowrap;
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.seg:hover { color: var(--text); background: var(--hull-2); }
+.seg.is-on { background: var(--crystal-deep); color: #fff; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .15); }
+
+/* interrupteur */
+.switch { position: relative; display: inline-block; width: 38px; height: 20px; }
+.switch-input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; z-index: 1; }
+.switch-track {
+  position: absolute; inset: 0;
+  background: var(--void);
+  border: 1px solid var(--edge-hi);
+  transition: background .15s var(--ease), border-color .15s var(--ease);
+}
+.switch-track::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 12px; height: 12px;
+  background: var(--muted);
+  transition: transform .18s var(--ease), background .15s var(--ease);
+}
+.switch-input:checked + .switch-track { background: rgba(155, 107, 255, .25); border-color: var(--crystal); }
+.switch-input:checked + .switch-track::after { transform: translateX(18px); background: var(--ion); }
+.switch-input:focus-visible + .switch-track { outline: 2px solid var(--ion); outline-offset: 2px; }
+
+/* ---------- Barre de préréglages ---------- */
+.preset-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  background: linear-gradient(180deg, rgba(155, 107, 255, .08), rgba(155, 107, 255, .02));
+  border: 1px solid rgba(155, 107, 255, .25);
+  border-left: 2px solid var(--crystal);
+}
+.preset-label { color: var(--crystal); font-size: 11.5px; font-weight: 600; }
+.preset-row { display: grid; grid-template-columns: minmax(0, 1fr) 30px auto; gap: 6px; align-items: center; }
+.preset-row .icon-btn { width: 30px; height: 30px; }
+
+/* les flèches des champs numériques gênent la lecture : saisie au clavier */
+.num-input::-webkit-inner-spin-button,
+.num-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
